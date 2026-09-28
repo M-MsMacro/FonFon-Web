@@ -1,0 +1,203 @@
+const plural = (n: number, one: string, other: string) => (n === 1 ? one : other);
+
+export const t = {
+  brand: { name: "FonFon", tier: "Pro" },
+
+  common: {
+    today: "Hoje",
+    retry: "Tentar novamente",
+    cancel: "Cancelar",
+    close: "Fechar",
+    save: "Salvar",
+    back: "Voltar",
+    loading: "Carregando…",
+  },
+
+  auth: {
+    signInTitle: "Entrar no FonFon Pro",
+    signUpTitle: "Criar conta",
+    forgotTitle: "Recuperar senha",
+    resetTitle: "Nova senha",
+    name: "Seu nome",
+    email: "E-mail",
+    password: "Senha",
+    passwordHint: "Mínimo de 8 caracteres",
+    signIn: "Entrar",
+    signUp: "Criar conta",
+    sendLink: "Enviar link",
+    savePassword: "Salvar senha",
+    goSignUp: "Ainda não tenho conta",
+    goSignIn: "Já tenho conta",
+    forgot: "Esqueci minha senha",
+    sharedComputer: "Não use em computador compartilhado sem sair da conta.",
+    checkEmailTitle: "Confira seu e-mail",
+    checkEmailBody: "Enviamos um link para confirmar a conta. Depois de confirmar, é só entrar.",
+    resetSentBody: "Se houver uma conta com esse e-mail, enviamos um link para criar uma nova senha.",
+    resetDone: "Senha atualizada. Você já pode continuar.",
+    emailNotConfirmed: "Falta confirmar o e-mail. Abra o link que enviamos.",
+    resend: "Reenviar e-mail de confirmação",
+    resent: "Reenviamos o e-mail de confirmação.",
+    invalidCredentials: "E-mail ou senha incorretos.",
+    weakPassword: "A senha precisa ter pelo menos 8 caracteres.",
+    alreadyRegistered: "Já existe uma conta com esse e-mail. Entre ou recupere a senha.",
+    notConfigured: "O site ainda não está configurado com o servidor.",
+    linkExpired: "O link expirou ou já foi usado. Peça um novo.",
+    signOut: "Sair",
+    signOutTitle: "Sair da conta?",
+  },
+
+  brandPage: {
+    headline: "Treino de fala para crianças, com acompanhamento da fono.",
+    body: "O FonFon transforma a prática de fonemas em jogo. A fonoaudióloga prescreve, a criança joga e o progresso aparece na hora.",
+    appStore: "Baixar na App Store",
+    forTherapists: "Sou fonoaudióloga",
+    comingSoon: "Em breve na App Store",
+    linkTitle: "Vincular a criança à fonoaudióloga",
+    linkIntro: "Siga os passos no celular da criança ou do responsável:",
+    linkSteps: [
+      "Baixe o app FonFon.",
+      "Abra a área do responsável.",
+      "Digite o código acima e cadastre a criança.",
+      "A fonoaudióloga aprova o vínculo e a prescrição aparece no app.",
+    ],
+    linkCode: "Código da fonoaudióloga",
+    linkInvalid: "Este código não parece válido. Confira com a sua fonoaudióloga.",
+  },
+
+  code: {
+    section: "Código",
+    copy: "Copiar",
+    copied: "Copiado",
+    download: "Baixar QR",
+    qrLabel: (code: string) => `QR Code do código ${code}`,
+  },
+
+  profile: { title: "Meu perfil", menu: "Conta" },
+
+  patients: {
+    title: "Pacientes",
+    search: "Buscar por nome",
+    empty:
+      "Nenhuma criança ainda. Envie seu código para o responsável cadastrar a criança no app FonFon.",
+    noSearchResults: "Nenhuma criança com esse nome.",
+    select: "Selecione uma criança para ver os detalhes.",
+    notFound: "Não encontramos essa criança.",
+    backToList: "Pacientes",
+    remove: "Remover",
+    removeTitle: (name: string) => `Remover ${name}?`,
+    removeBody:
+      "Isso apaga o vínculo, a prescrição, as sessões e as notas dessa criança. Não dá para desfazer.",
+    count: (n: number) => plural(n, "1 criança", `${n} crianças`),
+    pendingRequests: (n: number) =>
+      plural(n, "1 solicitação de vínculo", `${n} solicitações de vínculo`),
+  },
+
+  patient: {
+    noPracticeThisWeek: "Sem prática registrada nesta semana",
+    age: (years: number) => plural(years, "1 ano", `${years} anos`),
+    minutes: (n: number) => `${n} min`,
+    minutesThisWeek: (n: number) => `${n} min esta semana`,
+    guardian: (name: string) => `Responsável: ${name}`,
+    newPatient: "NOVO",
+    onTrack: "Bem",
+    needsEncouragement: "ATT",
+  },
+
+  status: {
+    noPrescription: "Sem prescrição ativa",
+    active: "Ativo",
+    done: "Concluído",
+    available: "Disponível",
+  },
+
+  pending: {
+    banner: "Vínculo aguardando sua aprovação",
+    age: "Idade",
+    guardian: "Responsável",
+    appleAccount: "Conta do responsável",
+    sentAt: "Enviada",
+    approve: "Aprovar",
+    decline: "Recusar",
+    birth: (date: string) => `nascida em ${date}`,
+    matches: "Dados conferem",
+    notMatches: "Dados não conferem",
+  },
+
+  detail: {
+    activeTime: "Tempo ativo",
+    activities: "Atividades",
+    unfinished: "Não concluídas",
+    activePhonemes: "Fonemas ativos",
+    changePrescription: "Alterar prescrição",
+    thisWeek: "Análise semanal",
+    activeTraining: "de treino ativo",
+    legendMinutes: "Minutos ativos",
+    legendUnfinished: "Atividade não concluída",
+    fullPathUnlocked: "Percurso completo liberado",
+    stillPlayable: "segue jogável",
+    recentSessions: "Sessões recentes",
+    allSessions: "Ver todas as sessões",
+    allActivity: "Ver todas as atividades",
+    phonemeActivityTitle: "Atividade por fonema",
+    phonemeActivityEmpty: "Nenhuma atividade registrada nesta semana.",
+    phonemeActivityEmptyDay: "Nenhuma atividade registrada nesse dia.",
+    scopeWeek: "Semana",
+    scopeDay: "Dia",
+    historyTitle: "Histórico de fonemas",
+    viewHistory: "Ver histórico",
+    historyEmpty: "Nenhum fonema no histórico ainda.",
+    notes: "Notas privadas",
+    newNote: "Nova",
+    notesEmpty: "Nenhuma nota ainda.",
+    sessionsEmpty: "Nenhuma sessão recente.",
+    sessionDone: "Feito",
+    sessionAbandoned: "Saiu",
+    previousWeek: "Semana anterior",
+    nextWeek: "Próxima semana",
+    previousDay: "Dia anterior",
+    nextDay: "Próximo dia",
+    metricsLocked: "As métricas aparecem depois que você aprovar o vínculo.",
+    footnote: "Pausa, tela bloqueada e app em segundo plano não contam como tempo ativo.",
+    activeSince: (date: string) => `Ativo desde ${date}`,
+    completedOn: (date: string) => `Concluído em ${date}`,
+    dayDetail: (minutes: number, activities: number) =>
+      `${minutes} minutos de treino ativo · ${activities} atividades`,
+    stageUnfinished: (n: number, stage: string) =>
+      plural(n, `1 atividade não concluída em ${stage}`, `${n} atividades não concluídas em ${stage}`),
+    weekBar: (day: string, minutes: number, unfinished: number) =>
+      `${day}: ${minutes} min${unfinished > 0 ? `, ${plural(unfinished, "1 atividade não concluída", `${unfinished} atividades não concluídas`)}` : ""}`,
+  },
+
+  note: { title: "Nova nota", placeholder: "Escreva aqui…" },
+
+  allSessions: { title: "Todas as sessões", empty: "Nenhuma sessão ainda.", loadMore: "Carregar mais" },
+
+  prescription: {
+    title: "Prescrição",
+    active: "Ativos",
+    completed: "Concluídos",
+    available: "Disponíveis",
+    footnote:
+      "Ativar libera o percurso inteiro do fonema. Marcar como concluído tira o fonema da prescrição ativa e mantém o acesso da criança. Toque num fonema para mudar o estado.",
+    activeAfterSaving: (n: number) => plural(n, "1 ativo", `${n} ativos`),
+    pendingChanges: (n: number) => plural(n, "1 mudança pendente", `${n} mudanças pendentes`),
+    island: (symbol: string) => `Ilha do fonema ${symbol}`,
+    stateLabel: { available: "Disponível", active: "Ativo", completed: "Concluído" },
+    saving: "Salvando…",
+  },
+
+  stage: { warmup: "Aquecimento", phoneme: "Fonema", syllable: "Sílaba", word: "Palavra" },
+  progress: { completed: "concluída", inProgress: "em andamento", notStarted: "não iniciada" },
+
+  failure: {
+    title: "Não foi possível concluir",
+    offline: "Sem conexão. Tente de novo quando a internet voltar.",
+    childNotFound: "Esta criança não foi encontrada.",
+    roleConflict: "Este e-mail já é usado no app das crianças. Use outro e-mail.",
+    notSignedIn: "Sua sessão expirou. Entre de novo.",
+    generic: "Algo deu errado. Tente de novo.",
+    noConnection: "Sem conexão",
+  },
+} as const;
+
+export type StageKey = keyof typeof t.stage;
