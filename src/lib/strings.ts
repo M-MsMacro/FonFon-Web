@@ -1,7 +1,7 @@
 const plural = (n: number, one: string, other: string) => (n === 1 ? one : other);
 
 export const t = {
-  brand: { name: "FonFon", tier: "Pro" },
+  brand: { name: "FonFon" },
 
   common: {
     today: "Hoje",
@@ -14,7 +14,9 @@ export const t = {
   },
 
   auth: {
-    signInTitle: "Entrar no FonFon Pro",
+    signInTitle: "Entrar no FonFon",
+    signInWithApple: "Continuar com Apple",
+    appleSignInFailed: "Não foi possível entrar com Apple. Tente de novo.",
     signUpTitle: "Criar conta",
     forgotTitle: "Recuperar senha",
     resetTitle: "Nova senha",

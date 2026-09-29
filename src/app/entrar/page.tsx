@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState, type FormEvent } from "react";
@@ -15,7 +16,9 @@ function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(params.get("erro") === "link" ? t.auth.linkExpired : null);
+  const [error, setError] = useState<string | null>(
+    params.get("erro") === "apple" ? t.auth.appleSignInFailed : params.get("erro") === "link" ? t.auth.linkExpired : null,
+  );
   const [unconfirmed, setUnconfirmed] = useState(false);
   const [resent, setResent] = useState(false);
 
@@ -50,6 +53,20 @@ function SignInForm() {
     if (!failure) setResent(true);
   }
 
+  async function signInWithApple() {
+    setBusy(true);
+    setError(null);
+    const next = safeNext(params.get("next"));
+    const { error: failure } = await supabase().auth.signInWithOAuth({
+      provider: "apple",
+      options: { redirectTo: `${window.location.origin}/auth/callback?provider=apple&next=${encodeURIComponent(next)}` },
+    });
+    if (failure) {
+      setError(t.auth.appleSignInFailed);
+      setBusy(false);
+    }
+  }
+
   return (
     <AuthShell
       title={t.auth.signInTitle}
@@ -65,6 +82,18 @@ function SignInForm() {
       }
     >
       {!isConfigured && <Notice>{t.auth.notConfigured}</Notice>}
+      {error && <Notice>{error}</Notice>}
+      <button type="button" className="flex w-full justify-center disabled:cursor-not-allowed disabled:opacity-50" disabled={busy || !isConfigured} onClick={signInWithApple}>
+        <Image
+          unoptimized
+          src="https://appleid.cdn-apple.com/appleid/button?type=continue&color=black&border_radius=22&height=44&width=375&locale=pt_BR&scale=2"
+          alt={t.auth.signInWithApple}
+          width={375}
+          height={44}
+          className="h-auto w-full max-w-[375px]"
+        />
+      </button>
+      <p className="text-center text-sm text-ink-2">ou entre com e-mail</p>
       <form onSubmit={submit} className="space-y-4">
         <TextField
           label={t.auth.email}
@@ -82,7 +111,6 @@ function SignInForm() {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
-        {error && <Notice>{error}</Notice>}
         {unconfirmed && !resent && (
           <Button type="button" variant="plain" className="px-0" onClick={resend}>
             {t.auth.resend}

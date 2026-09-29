@@ -1,4 +1,4 @@
-# FonFon Pro Web
+# FonFon Web
 
 Speech therapist area of FonFon in Next.js, plus the public pages for the linking QR code. Behavior is defined in `../Macro/Specs/fono-web-nextjs.md`.
 
@@ -17,7 +17,8 @@ Set `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `.env.local` (the same publishable key th
 In the Supabase dashboard (Authentication):
 
 - Providers → Email enabled, "Confirm email" on.
-- URL Configuration → Site URL `https://fonfonapp.com.br`; Redirect URLs `https://fonfonapp.com.br/auth/callback` and `http://localhost:3000/auth/callback`.
+- Providers → Apple enabled. In Apple Developer, create a Services ID linked to the iOS therapist App ID (`br.academy.marcos.FonFon-Fono`) and a Sign in with Apple key. Register domain `vwyaxmhmumwdgyllxjut.supabase.co` and return URL `https://vwyaxmhmumwdgyllxjut.supabase.co/auth/v1/callback` on that Services ID. In Supabase Apple Client IDs, put the Services ID **first** and keep the iOS App ID in the list so native and web sign-in use the same Supabase account. Add the generated client secret to the provider settings.
+- URL Configuration → Site URL `https://fonfonapp.com.br`; Redirect URLs `https://fonfonapp.com.br/auth/callback**` and `http://localhost:3000/auth/callback**` (the callback includes query parameters such as `provider` and `next`).
 - SMTP → a custom SMTP sender on `fonfonapp.com.br` (the default sender is rate limited).
 
 ## Deploy (Netlify)

@@ -55,9 +55,7 @@ export default function ProLayout({ children }: LayoutProps<"/pro">) {
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
           <Link href="/pro" className="flex items-center gap-2">
             <Image src="/fonfon-mascot.png" alt="" width={32} height={32} className="size-8 object-contain" priority />
-            <span className="font-brand text-xl">
-              {t.brand.name} <span className="text-accent">{t.brand.tier}</span>
-            </span>
+            <span className="font-brand text-xl">{t.brand.name}</span>
           </Link>
           {profile && (
             <Link

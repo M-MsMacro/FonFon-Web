@@ -13,5 +13,5 @@ export async function GET(request: Request) {
     if (!error) return NextResponse.redirect(`${origin}${next}`);
   }
 
-  return NextResponse.redirect(`${origin}/entrar?erro=link`);
+  return NextResponse.redirect(`${origin}/entrar?erro=${searchParams.get("provider") === "apple" ? "apple" : "link"}`);
 }
