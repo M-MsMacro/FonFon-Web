@@ -16,7 +16,6 @@ import {
   AlertCircleIcon,
   CheckCircleIcon,
   ClockIcon,
-  GearIcon,
   PeopleIcon,
   SearchIcon,
   SparkleIcon,
@@ -232,7 +231,6 @@ export function PatientList() {
             <span className="block truncate text-[15px] leading-tight">{profile.displayName}</span>
             <span className="block truncate text-xs leading-tight text-ink-2">{profile.code}</span>
           </span>
-          <GearIcon className="size-[18px] text-ink-2" />
         </Link>
       )}
 
