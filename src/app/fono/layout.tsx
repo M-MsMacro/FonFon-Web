@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { PatientList } from "@/components/PatientList";
 import { Button, Loading, Notice, cx } from "@/components/ui";
 import { bootstrapProfile } from "@/lib/api";
+import { profileSeed } from "@/lib/auth-user";
 import { toApiError, messageFor } from "@/lib/errors";
 import { useProfile, useSignOut } from "@/lib/hooks";
 import { t } from "@/lib/strings";
@@ -35,8 +36,7 @@ export default function FonoLayout({ children }: LayoutProps<"/fono">) {
           await signOut();
           return;
         }
-        const email = user.email ?? "";
-        const name = (user.user_metadata?.display_name as string | undefined) || email.split("@")[0];
+        const { name, email } = profileSeed(user);
         await bootstrapProfile(name, email);
         await mutate();
       } catch (failure) {
