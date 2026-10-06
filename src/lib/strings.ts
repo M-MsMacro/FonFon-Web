@@ -110,6 +110,21 @@ export const t = {
     status: { attention: "Atenção", onTrack: "Em dia", new: "Novo" },
   },
 
+  report: {
+    open: "Relatório",
+    title: (name: string) => `Relatório de ${name}`,
+    averageActivity: "Atividade média",
+    activities: "Atividades feitas",
+    averageTime: "Tempo médio",
+    activity: "Atividade",
+    activityRange: (range: string) => `Dias entre ${range}`,
+    phonemesInProgress: "Fonemas em treino",
+    completedSessions: "Sessões concluídas",
+    footer: "Gerado pelo FonFon para Fonoaudiólogas",
+    print: "Imprimir",
+    exportPdf: "Exportar PDF",
+  },
+
   patients: {
     title: "Pacientes",
     search: "Buscar por nome",

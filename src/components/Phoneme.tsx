@@ -47,7 +47,7 @@ export function StageTrack({ progress }: { progress: Record<Stage, StageProgress
             <span className="block h-1.5 overflow-hidden rounded-full bg-ink/10">
               <span
                 className="block h-full rounded-full bg-accent-deep"
-                style={{ width: `${progressValue[state]}%` }}
+                style={{ width: `${progressValue[state]}%`, minWidth: 6 }}
               />
             </span>
             <span className="mt-1 block truncate text-[11px] text-ink-2">{t.stage[stage]}</span>

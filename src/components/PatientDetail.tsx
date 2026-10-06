@@ -10,11 +10,12 @@ import { symbolFor } from "@/lib/phonemes";
 import { patientStatus, weekTotals } from "@/lib/status";
 import { t } from "@/lib/strings";
 import { STAGES, type Child, type PracticeSession, type Stage } from "@/lib/types";
-import { AlertCircleIcon, CheckCircleIcon, NoteIcon, SidebarRightIcon } from "./icons";
+import { AlertCircleIcon, CheckCircleIcon, DocumentIcon, NoteIcon, SidebarRightIcon } from "./icons";
 import { NoteDialog } from "./NoteDialog";
 import { LetterTile, StageTrack } from "./Phoneme";
 import { StatusIcon } from "./PatientList";
 import { PrescriptionDialog } from "./PrescriptionDialog";
+import { ReportDialog } from "./ReportDialog";
 import { BackLink, Stepper } from "./Rows";
 import { WeekChart } from "./WeekChart";
 import { Avatar, Button, CapsuleLink, Notice, StatTile, SurfaceCard, cx, initialsOf } from "./ui";
@@ -71,6 +72,7 @@ export function PatientDetail({ child }: { child: Child }) {
   const [offset, setOffset] = useState(0);
   const [prescribing, setPrescribing] = useState(false);
   const [noting, setNoting] = useState(false);
+  const [reporting, setReporting] = useState(false);
   const [inspector, setInspector] = useState(true);
   const thisWeek = useMemo(() => startOfWeek(), []);
   const weekStart = addDays(thisWeek, offset * 7);
@@ -116,6 +118,9 @@ export function PatientDetail({ child }: { child: Child }) {
         <div className="flex items-center gap-1 rounded-full bg-ink/5 p-0.5">
           <button type="button" className={toolbarButton} onClick={() => setNoting(true)} aria-label={t.desktop.newNote}>
             <NoteIcon className="size-[18px]" />
+          </button>
+          <button type="button" className={toolbarButton} onClick={() => setReporting(true)} aria-label={t.report.open}>
+            <DocumentIcon className="size-[18px]" />
           </button>
           <button
             type="button"
@@ -293,6 +298,19 @@ export function PatientDetail({ child }: { child: Child }) {
       </div>
 
       {prescribing && <PrescriptionDialog open onClose={() => setPrescribing(false)} child={child} />}
+      {reporting && (
+        <ReportDialog
+          open
+          onClose={() => setReporting(false)}
+          data={{
+            firstName: child.name.split(" ")[0],
+            days,
+            prescriptions: child.prescriptions,
+            progress,
+            sessions: sessions.data ?? [],
+          }}
+        />
+      )}
       {noting && <NoteDialog open onClose={() => setNoting(false)} childId={child.id} />}
     </div>
   );

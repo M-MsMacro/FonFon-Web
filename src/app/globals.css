@@ -111,6 +111,45 @@ body {
   outline-offset: 2px;
 }
 
+.report-light {
+  --page: #ffffff;
+  --card: #f3f3f5;
+  --sunken: #ececf0;
+  --separator: rgb(0 0 0 / 0.08);
+  --text-primary: #2b3138;
+  --text-secondary: #7b858f;
+  --accent: #0e93b5;
+  --accent-deep: #0c6b7f;
+  --accent-soft: #dbeef4;
+  --accent-mid: #7fdcec;
+  --done: #5c8a0f;
+  --done-soft: #eef8dd;
+  --alert-strong: #f2543f;
+  background: #ffffff;
+  color: #2b3138;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #report,
+  #report * {
+    visibility: visible;
+  }
+
+  #report {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+  }
+
+  @page {
+    margin: 12mm;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

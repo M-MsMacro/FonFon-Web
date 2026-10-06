@@ -135,6 +135,18 @@ export const NoteIcon = ({ className }: IconProps) => (
   </svg>
 );
 
+export const DocumentIcon = ({ className }: IconProps) => (
+  <svg {...base} className={className}>
+    <path d="M7 3.5h7l4.5 4.5v11a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 19V5A1.5 1.5 0 0 1 7 3.5zM13.5 3.5V8.5h5M9 13h6M9 16.5h6" />
+  </svg>
+);
+
+export const PrinterIcon = ({ className }: IconProps) => (
+  <svg {...base} className={className}>
+    <path d="M7 9V4h10v5M7 17H5a1.5 1.5 0 0 1-1.5-1.5v-5A1.5 1.5 0 0 1 5 9h14a1.5 1.5 0 0 1 1.5 1.5v5A1.5 1.5 0 0 1 19 17h-2M7 14h10v6H7z" />
+  </svg>
+);
+
 export const SidebarRightIcon = ({ className }: IconProps) => (
   <svg {...base} className={className}>
     <rect x="3.5" y="5" width="17" height="14" rx="2.5" />
