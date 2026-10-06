@@ -10,7 +10,7 @@ import { useProfile, useSignOut } from "@/lib/hooks";
 import { t } from "@/lib/strings";
 import { supabase } from "@/lib/supabase/client";
 
-export default function ProLayout({ children }: LayoutProps<"/pro">) {
+export default function FonoLayout({ children }: LayoutProps<"/fono">) {
   const router = useRouter();
   const pathname = usePathname();
   const signOut = useSignOut();
@@ -30,7 +30,7 @@ export default function ProLayout({ children }: LayoutProps<"/pro">) {
         const { data } = await supabase().auth.getUser();
         const user = data.user;
         if (!user) {
-          router.replace("/entrar");
+          await signOut();
           return;
         }
         const email = user.email ?? "";
@@ -41,9 +41,9 @@ export default function ProLayout({ children }: LayoutProps<"/pro">) {
         setBootError(messageFor(failure));
       }
     })();
-  }, [profile, mutate, router]);
+  }, [profile, mutate, signOut]);
 
-  const onList = pathname === "/pro";
+  const onList = pathname === "/fono";
   const failure = bootError ?? (error && toApiError(error).code !== "notSignedIn" ? messageFor(error) : null);
   const wrongRole = profile && profile.role !== "therapist";
 
@@ -52,6 +52,11 @@ export default function ProLayout({ children }: LayoutProps<"/pro">) {
       {wrongRole || !profile ? (
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-4 px-4 py-12">
           {failure && <Notice>{failure}</Notice>}
+          {failure && !wrongRole && (
+            <Button variant="secondary" onClick={signOut}>
+              {t.auth.signOut}
+            </Button>
+          )}
           {wrongRole ? (
             <>
               <Notice>{t.failure.roleConflict}</Notice>

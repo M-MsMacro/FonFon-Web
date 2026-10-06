@@ -12,7 +12,7 @@ FonFon Pro Web: the speech therapist app (iOS `Macro/AppFono/FonFon-Fono`) as a 
 
 - `/` landing, `/v/[codigo]` QR destination, `/.well-known/apple-app-site-association` Universal Link file.
 - `/entrar`, `/criar-conta`, `/recuperar-senha`, `/redefinir-senha`, `/auth/callback`, `/auth/confirm`: e-mail and password accounts (Supabase Auth).
-- `/pro/**`: the therapist area. Client components, data through SWR hooks in `src/lib/hooks.ts`.
+- `/fono/**`: the therapist area. Client components, data through SWR hooks in `src/lib/hooks.ts`.
 
 # Backend
 

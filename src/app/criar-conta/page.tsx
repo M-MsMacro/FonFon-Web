@@ -30,7 +30,7 @@ export default function SignUpPage() {
       password,
       options: {
         data: { display_name: name.trim() },
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=/pro`,
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=/fono`,
       },
     });
     setBusy(false);
@@ -44,7 +44,7 @@ export default function SignUpPage() {
       return;
     }
     if (data.session) {
-      router.replace("/pro");
+      router.replace("/fono");
       router.refresh();
       return;
     }

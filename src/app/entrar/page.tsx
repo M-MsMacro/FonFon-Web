@@ -48,7 +48,7 @@ function SignInForm() {
     const { error: failure } = await supabase().auth.resend({
       type: "signup",
       email: email.trim(),
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=/pro` },
+      options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=/fono` },
     });
     if (!failure) setResent(true);
   }

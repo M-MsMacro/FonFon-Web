@@ -80,7 +80,7 @@ export default function AllActivityPage() {
 
   return (
     <div className="mx-auto max-w-4xl space-y-6 p-6">
-      <BackLink href={`/pro/pacientes/${id}`} label={child?.name ?? t.patients.backToList} always />
+      <BackLink href={`/fono/pacientes/${id}`} label={child?.name ?? t.patients.backToList} always />
       <h1 className="text-2xl font-semibold">{t.detail.phonemeActivityTitle}</h1>
 
       <div role="tablist" className="flex gap-1 rounded-full bg-sunken p-1">

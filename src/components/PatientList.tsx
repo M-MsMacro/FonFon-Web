@@ -75,7 +75,7 @@ function PatientRow({
   return (
     <li className="group relative">
       <Link
-        href={`/pro/pacientes/${child.id}`}
+        href={`/fono/pacientes/${child.id}`}
         aria-current={selected ? "page" : undefined}
         className={cx(
           "flex min-h-12 items-center gap-2 rounded-[10px] border px-2 py-1.5",
@@ -123,8 +123,8 @@ export function PatientList() {
   const firstVisible = visible[0]?.id;
 
   useEffect(() => {
-    if (pathname !== "/pro" || !firstVisible) return;
-    if (window.matchMedia("(min-width: 1024px)").matches) router.replace(`/pro/pacientes/${firstVisible}`);
+    if (pathname !== "/fono" || !firstVisible) return;
+    if (window.matchMedia("(min-width: 1024px)").matches) router.replace(`/fono/pacientes/${firstVisible}`);
   }, [pathname, firstVisible, router]);
 
   async function confirmRemove() {
@@ -134,7 +134,7 @@ export function PatientList() {
     try {
       await deleteChild(removing.id);
       await mutate();
-      if (pathname.includes(removing.id)) router.push("/pro");
+      if (pathname.includes(removing.id)) router.push("/fono");
       setRemoving(null);
     } catch (failure) {
       setRemoveError(messageFor(failure));
@@ -207,7 +207,7 @@ export function PatientList() {
               key={child.id}
               child={child}
               week={weeks?.[child.id]}
-              selected={pathname.startsWith(`/pro/pacientes/${child.id}`)}
+              selected={pathname.startsWith(`/fono/pacientes/${child.id}`)}
               onRemove={() => {
                 setRemoveError(null);
                 setRemoving(child);
@@ -222,7 +222,7 @@ export function PatientList() {
 
       {profile && (
         <Link
-          href="/pro/perfil"
+          href="/fono/perfil"
           aria-label={t.desktop.account}
           className="flex items-center gap-2 border-t border-separator bg-page/80 px-3 py-2.5 hover:bg-ink/5"
         >

@@ -98,7 +98,7 @@ export function PatientDetail({ child }: { child: Child }) {
   const subtitle = [t.patient.age(ageInYears(child.birthDate)), guardian ? t.patient.guardian(guardian) : null]
     .filter(Boolean)
     .join(" · ");
-  const base = `/pro/pacientes/${child.id}`;
+  const base = `/fono/pacientes/${child.id}`;
   const status = patientStatus(child, offset === 0 ? week.data : currentWeek.data);
   const progress = week.data?.progress;
 
@@ -110,7 +110,7 @@ export function PatientDetail({ child }: { child: Child }) {
   return (
     <div className="flex min-h-dvh flex-col">
       <header className="sticky top-0 z-10 flex min-h-14 items-center gap-3 border-b border-separator bg-page/85 px-6 py-2 backdrop-blur">
-        <BackLink href="/pro" label={t.patients.backToList} />
+        <BackLink href="/fono" label={t.patients.backToList} />
         <div className="min-w-0 flex-1">
           <h1 className="truncate text-[15px] font-semibold leading-tight">{child.name}</h1>
           <p className="truncate text-xs leading-tight text-ink-2">{subtitle}</p>
