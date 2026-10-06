@@ -30,7 +30,7 @@ export default function ProLayout({ children }: LayoutProps<"/pro">) {
         const { data } = await supabase().auth.getUser();
         const user = data.user;
         if (!user) {
-          router.replace("/entrar");
+          await signOut();
           return;
         }
         const email = user.email ?? "";
@@ -41,7 +41,7 @@ export default function ProLayout({ children }: LayoutProps<"/pro">) {
         setBootError(messageFor(failure));
       }
     })();
-  }, [profile, mutate, router]);
+  }, [profile, mutate, signOut]);
 
   const onList = pathname === "/pro";
   const failure = bootError ?? (error && toApiError(error).code !== "notSignedIn" ? messageFor(error) : null);
@@ -52,6 +52,11 @@ export default function ProLayout({ children }: LayoutProps<"/pro">) {
       {wrongRole || !profile ? (
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-4 px-4 py-12">
           {failure && <Notice>{failure}</Notice>}
+          {failure && !wrongRole && (
+            <Button variant="secondary" onClick={signOut}>
+              {t.auth.signOut}
+            </Button>
+          )}
           {wrongRole ? (
             <>
               <Notice>{t.failure.roleConflict}</Notice>
