@@ -17,9 +17,9 @@ export default function AllSessionsPage() {
   const hasMore = data !== undefined && data[data.length - 1].length === SESSIONS_PAGE;
 
   return (
-    <div className="space-y-6">
+    <div className="mx-auto max-w-4xl space-y-6 p-6">
       <BackLink href={`/pro/pacientes/${id}`} label={child?.name ?? t.patients.backToList} always />
-      <h1 className="font-brand text-3xl">{t.allSessions.title}</h1>
+      <h1 className="text-2xl font-semibold">{t.allSessions.title}</h1>
 
       {error && (
         <Notice action={<Button variant="plain" onClick={() => mutate()}>{t.common.retry}</Button>}>

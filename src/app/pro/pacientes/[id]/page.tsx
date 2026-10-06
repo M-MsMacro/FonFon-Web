@@ -16,7 +16,7 @@ export default function PatientPage() {
 
   if (!child) {
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 p-6">
         <BackLink href="/pro" label={t.patients.backToList} />
         <EmptyState message={t.patients.notFound} />
       </div>

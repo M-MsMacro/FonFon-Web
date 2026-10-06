@@ -101,3 +101,55 @@ export const DownloadIcon = ({ className }: IconProps) => (
     <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
   </svg>
 );
+
+export const AlertCircleIcon = ({ className }: IconProps) => (
+  <svg {...base} className={className}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7.5v5.5M12 16.5v.01" />
+  </svg>
+);
+
+export const CheckCircleIcon = ({ className }: IconProps) => (
+  <svg {...base} className={className}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="m8 12.5 3 3 5-6" />
+  </svg>
+);
+
+export const SparkleIcon = ({ className }: IconProps) => (
+  <svg {...base} className={className}>
+    <path d="M12 3.5 14 10l6.5 2-6.5 2-2 6.5L10 14l-6.5-2L10 10z" />
+  </svg>
+);
+
+export const GearIcon = ({ className }: IconProps) => (
+  <svg {...base} className={className}>
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8" />
+  </svg>
+);
+
+export const NoteIcon = ({ className }: IconProps) => (
+  <svg {...base} className={className}>
+    <path d="M12 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6M18.5 3.5a2 2 0 0 1 3 3L12 16l-4 1 1-4z" />
+  </svg>
+);
+
+export const DocumentIcon = ({ className }: IconProps) => (
+  <svg {...base} className={className}>
+    <path d="M7 3.5h7l4.5 4.5v11a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 19V5A1.5 1.5 0 0 1 7 3.5zM13.5 3.5V8.5h5M9 13h6M9 16.5h6" />
+  </svg>
+);
+
+export const PrinterIcon = ({ className }: IconProps) => (
+  <svg {...base} className={className}>
+    <path d="M7 9V4h10v5M7 17H5a1.5 1.5 0 0 1-1.5-1.5v-5A1.5 1.5 0 0 1 5 9h14a1.5 1.5 0 0 1 1.5 1.5v5A1.5 1.5 0 0 1 19 17h-2M7 14h10v6H7z" />
+  </svg>
+);
+
+export const SidebarRightIcon = ({ className }: IconProps) => (
+  <svg {...base} className={className}>
+    <rect x="3.5" y="5" width="17" height="14" rx="2.5" />
+    <path d="M14.5 5v14" />
+  </svg>
+);

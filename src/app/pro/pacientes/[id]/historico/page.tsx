@@ -18,9 +18,9 @@ export default function PhonemeHistoryPage() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="mx-auto max-w-4xl space-y-6 p-6">
       <BackLink href={`/pro/pacientes/${id}`} label={child?.name ?? t.patients.backToList} always />
-      <h1 className="font-brand text-3xl">{t.detail.historyTitle}</h1>
+      <h1 className="text-2xl font-semibold">{t.detail.historyTitle}</h1>
 
       {isLoading && !child && <Loading label={t.common.loading} />}
 

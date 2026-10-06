@@ -17,12 +17,12 @@ export default function ProfilePage() {
   if (!profile) return <Loading label={t.common.loading} />;
 
   return (
-    <div className="mx-auto max-w-md space-y-6">
+    <div className="mx-auto max-w-md space-y-6 p-6">
       <BackLink href="/pro" label={t.patients.backToList} always />
 
       <div className="flex flex-col items-center gap-3">
         <Avatar initials={initialsOf(profile.displayName)} size={100} />
-        <h1 className="font-brand text-3xl">{profile.displayName}</h1>
+        <h1 className="text-2xl font-semibold">{profile.displayName}</h1>
         {profile.email && <p className="text-sm text-ink-2">{profile.email}</p>}
       </div>
 

@@ -2,7 +2,6 @@ import Image from "next/image";
 import { islandFor, symbolFor } from "@/lib/phonemes";
 import { t } from "@/lib/strings";
 import { STAGES, type PhonemeActivity, type Stage, type StageProgress } from "@/lib/types";
-import { CheckIcon } from "./icons";
 import { cx } from "./ui";
 
 export function PhonemeBadge({ phonemeKey, tone = "accent" }: { phonemeKey: string; tone?: "accent" | "done" }) {
@@ -23,30 +22,35 @@ export function PhonemeBadge({ phonemeKey, tone = "accent" }: { phonemeKey: stri
   );
 }
 
-const progressStyle: Record<StageProgress, string> = {
-  completed: "bg-done-soft text-done border-done-border",
-  inProgress: "bg-accent-soft text-accent-deep border-accent-mid",
-  notStarted: "bg-sunken text-ink-2 border-card-border",
-};
+const progressValue: Record<StageProgress, number> = { completed: 100, inProgress: 50, notStarted: 0 };
+
+export function LetterTile({ phonemeKey, size = 32 }: { phonemeKey: string; size?: number }) {
+  const island = islandFor(phonemeKey);
+  return (
+    <span
+      aria-hidden
+      className="inline-flex shrink-0 items-center justify-center rounded-lg bg-ink/10 font-semibold"
+      style={{ width: size, height: size, fontSize: size * 0.45 }}
+    >
+      {(island?.letter ?? symbolFor(phonemeKey)).toLowerCase()}
+    </span>
+  );
+}
 
 export function StageTrack({ progress }: { progress: Record<Stage, StageProgress> | undefined }) {
   return (
-    <ol className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
+    <ol className="grid grid-cols-4 gap-1.5">
       {STAGES.map((stage) => {
         const state = progress?.[stage] ?? "notStarted";
         return (
-          <li
-            key={stage}
-            className={cx(
-              "flex flex-col items-center gap-0.5 rounded-small border px-1 py-1.5 text-center text-[11px] font-medium",
-              progressStyle[state],
-            )}
-          >
-            <span className="inline-flex items-center gap-0.5">
-              {state === "completed" && <CheckIcon className="size-3" />}
-              {t.stage[stage]}
+          <li key={stage} aria-label={`${t.stage[stage]}: ${t.progress[state]}`}>
+            <span className="block h-1.5 overflow-hidden rounded-full bg-ink/10">
+              <span
+                className="block h-full rounded-full bg-accent-deep"
+                style={{ width: `${progressValue[state]}%`, minWidth: 6 }}
+              />
             </span>
-            <span className="text-[10px] font-normal opacity-80">{t.progress[state]}</span>
+            <span className="mt-1 block truncate text-[11px] text-ink-2">{t.stage[stage]}</span>
           </li>
         );
       })}
