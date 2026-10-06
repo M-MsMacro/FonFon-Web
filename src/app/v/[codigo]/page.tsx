@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { AppStoreButton } from "@/components/AppStoreButton";
+import { CopyAndOpenButton } from "@/components/CopyAndOpenButton";
 import { t } from "@/lib/strings";
 
 export const metadata: Metadata = {
@@ -40,7 +41,7 @@ export default async function LinkPage({ params }: PageProps<"/v/[codigo]">) {
       )}
 
       <div className="flex justify-center">
-        <AppStoreButton />
+        {isValid ? <CopyAndOpenButton code={code} /> : <AppStoreButton />}
       </div>
     </main>
   );
