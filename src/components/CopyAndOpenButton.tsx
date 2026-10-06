@@ -1,7 +1,6 @@
 "use client";
 
 import { t } from "@/lib/strings";
-import { linkUrl } from "./QrCode";
 
 const APP_STORE_URL = process.env.NEXT_PUBLIC_APP_STORE_URL;
 
@@ -16,7 +15,7 @@ export function CopyAndOpenButton({ code }: { code: string }) {
 
   async function copyThenOpen() {
     try {
-      await navigator.clipboard.writeText(linkUrl(code));
+      await navigator.clipboard.writeText(code);
     } catch {}
     window.location.href = APP_STORE_URL!;
   }
