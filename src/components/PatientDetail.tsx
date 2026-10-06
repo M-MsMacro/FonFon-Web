@@ -204,11 +204,7 @@ export function PatientDetail({ child }: { child: Child }) {
                 <CapsuleLink>{t.desktop.seeAll}</CapsuleLink>
               </Link>
             </div>
-            {sessions.data && sessions.data.length === 0 ? (
-              <p className="py-4 text-center text-sm text-ink-2">{t.detail.sessionsEmpty}</p>
-            ) : (
-              <SessionsTable sessions={sessions.data ?? []} />
-            )}
+            <SessionsTable sessions={sessions.data ?? []} />
           </SurfaceCard>
 
           <p className="text-xs text-ink-2">{t.detail.footnote}</p>

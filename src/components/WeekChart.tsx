@@ -31,7 +31,7 @@ export function WeekChart({ days, height = 190 }: { days: PracticeDay[]; height?
             />
           ))}
           <div
-            className="absolute inset-x-0 border-t border-dashed border-accent-deep"
+            className="absolute inset-x-0 border-t-2 border-dashed border-accent-deep"
             style={{ bottom: percent(DAILY_GOAL_MINUTES) }}
           >
             <span className="absolute -top-5 right-0 text-[11px] font-semibold text-accent-deep">

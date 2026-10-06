@@ -86,7 +86,7 @@ function PatientRow({
         <Avatar initials={initialsOf(child.name)} size={30} />
         <span className="min-w-0 flex-1">
           <span className="block truncate text-[15px] leading-tight">{child.name}</span>
-          <span className="block truncate text-xs leading-tight text-ink-2">{subtitleFor(child, week)}</span>
+          <span className="block truncate text-[11px] leading-tight text-ink-2">{subtitleFor(child, week)}</span>
         </span>
         {status && <StatusIcon status={status} className="size-[18px] shrink-0" />}
       </Link>

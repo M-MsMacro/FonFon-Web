@@ -86,7 +86,7 @@ export function StatTile({
   caption: string;
   tone?: "neutral" | "alert";
 }) {
-  const alert = tone === "alert" && value > 0;
+  const alert = tone === "alert";
   return (
     <div className="min-w-0 flex-1 rounded-medium bg-card px-4 py-3.5">
       <p className={cx("flex items-baseline gap-1 text-3xl font-semibold", alert ? "text-alert" : "text-ink")}>
