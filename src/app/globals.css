@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --page: #f7f8f9;
-  --card: #ffffff;
-  --sunken: #eef0f2;
-  --card-border: #dde1e5;
-  --separator: #eef0f2;
+  --page: #ffffff;
+  --card: #f3f3f5;
+  --sunken: #ececf0;
+  --card-border: rgb(0 0 0 / 0.07);
+  --separator: rgb(0 0 0 / 0.08);
 
   --text-primary: #2b3138;
   --text-secondary: #7b858f;
@@ -24,6 +24,8 @@
   --pending-soft: #fff7d9;
   --pending-border: #ffe280;
 
+  --attention: #d97500;
+  --new: #9b3fc9;
   --alert: #d63f2e;
   --alert-strong: #f2543f;
   --alert-soft: #fde5e2;
@@ -35,11 +37,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --page: #0f1215;
-    --card: #1a1e23;
-    --sunken: #14171b;
-    --card-border: #2a3037;
-    --separator: #262b31;
+    --page: #1e1e1e;
+    --card: #2a2a2c;
+    --sunken: #252527;
+    --card-border: rgb(255 255 255 / 0.07);
+    --separator: rgb(255 255 255 / 0.09);
 
     --text-primary: #f2f4f6;
     --text-secondary: #9aa3ad;
@@ -57,6 +59,8 @@
     --pending-soft: #2b2412;
     --pending-border: #54461c;
 
+    --attention: #ff9f0a;
+    --new: #c27ae8;
     --alert: #ff8474;
     --alert-soft: #2e1816;
     --alert-border: #5a2a25;
@@ -82,13 +86,15 @@
   --color-pending: var(--pending);
   --color-pending-soft: var(--pending-soft);
   --color-pending-border: var(--pending-border);
+  --color-attention: var(--attention);
+  --color-new: var(--new);
   --color-alert: var(--alert);
   --color-alert-strong: var(--alert-strong);
   --color-alert-soft: var(--alert-soft);
   --color-alert-border: var(--alert-border);
   --color-on-accent: var(--on-accent);
   --radius-small: 12px;
-  --radius-medium: 20px;
+  --radius-medium: 14px;
   --font-brand: var(--font-fredoka);
 }
 

@@ -1,11 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { PatientList } from "@/components/PatientList";
-import { Avatar, Button, Loading, Notice, cx, initialsOf } from "@/components/ui";
+import { Button, Loading, Notice, cx } from "@/components/ui";
 import { bootstrapProfile } from "@/lib/api";
 import { toApiError, messageFor } from "@/lib/errors";
 import { useProfile, useSignOut } from "@/lib/hooks";
@@ -50,50 +48,41 @@ export default function ProLayout({ children }: LayoutProps<"/pro">) {
   const wrongRole = profile && profile.role !== "therapist";
 
   return (
-    <div className="flex flex-1 flex-col">
-      <header className="sticky top-0 z-10 border-b border-card-border bg-page/90 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-          <Link href="/pro" className="flex items-center gap-2">
-            <Image src="/fonfon-mascot.png" alt="" width={32} height={32} className="size-8 object-contain" priority />
-            <span className="font-brand text-xl">{t.brand.name}</span>
-          </Link>
-          {profile && (
-            <Link
-              href="/pro/perfil"
-              aria-label={t.profile.menu}
-              className="inline-flex size-11 items-center justify-center rounded-full hover:bg-sunken"
-            >
-              <Avatar initials={initialsOf(profile.displayName)} />
-            </Link>
+    <div className="flex min-h-dvh">
+      {wrongRole || !profile ? (
+        <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-4 px-4 py-12">
+          {failure && <Notice>{failure}</Notice>}
+          {wrongRole ? (
+            <>
+              <Notice>{t.failure.roleConflict}</Notice>
+              <Button variant="secondary" onClick={signOut}>
+                {t.auth.signOut}
+              </Button>
+            </>
+          ) : (
+            !failure && <Loading label={t.common.loading} />
           )}
         </div>
-      </header>
-
-      <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-6">
-        {failure && (
-          <div className="mb-4">
-            <Notice>{failure}</Notice>
-          </div>
-        )}
-
-        {wrongRole ? (
-          <div className="space-y-4">
-            <Notice>{t.failure.roleConflict}</Notice>
-            <Button variant="secondary" onClick={signOut}>
-              {t.auth.signOut}
-            </Button>
-          </div>
-        ) : !profile ? (
-          !failure && <Loading label={t.common.loading} />
-        ) : (
-          <div className="flex flex-1 gap-8">
-            <aside className={cx("w-full lg:block lg:w-96 lg:shrink-0", onList ? "block" : "hidden")}>
-              <PatientList />
-            </aside>
-            <section className={cx("min-w-0 flex-1", onList ? "hidden lg:block" : "block")}>{children}</section>
-          </div>
-        )}
-      </div>
+      ) : (
+        <>
+          <aside
+            className={cx(
+              "w-full flex-col bg-sunken lg:sticky lg:top-0 lg:flex lg:h-dvh lg:w-[270px] lg:shrink-0 lg:border-r lg:border-separator",
+              onList ? "flex" : "hidden",
+            )}
+          >
+            <PatientList />
+          </aside>
+          <main className={cx("min-w-0 flex-1", onList ? "hidden lg:block" : "block")}>
+            {failure && (
+              <div className="p-4">
+                <Notice>{failure}</Notice>
+              </div>
+            )}
+            {children}
+          </main>
+        </>
+      )}
     </div>
   );
 }

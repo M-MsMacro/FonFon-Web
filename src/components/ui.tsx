@@ -1,5 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import { CheckIcon } from "./icons";
+import { CheckIcon, ChevronIcon } from "./icons";
 
 export const cx = (...classes: (string | false | null | undefined)[]) =>
   classes.filter(Boolean).join(" ");
@@ -86,15 +86,29 @@ export function StatTile({
   caption: string;
   tone?: "neutral" | "alert";
 }) {
+  const alert = tone === "alert" && value > 0;
   return (
-    <div className="flex-1 rounded-medium border border-card-border bg-card px-3 py-3">
-      <p className={cx("text-2xl font-semibold", tone === "alert" && value > 0 ? "text-alert" : "text-ink")}>
+    <div className="min-w-0 flex-1 rounded-medium bg-card px-4 py-3.5">
+      <p className={cx("flex items-baseline gap-1 text-3xl font-semibold", alert ? "text-alert" : "text-ink")}>
         {value}
-        {unit && <span className="ml-1 text-sm font-medium text-ink-2">{unit}</span>}
+        {unit && <span className="text-base font-normal text-ink-2">{unit}</span>}
       </p>
-      <p className="text-xs text-ink-2">{caption}</p>
+      <p className={cx("text-[15px]", alert ? "text-alert" : "text-ink-2")}>{caption}</p>
     </div>
   );
+}
+
+export function CapsuleLink({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft px-3 py-1.5 text-[15px] font-medium text-accent-deep">
+      {children}
+      <ChevronIcon className="size-3" />
+    </span>
+  );
+}
+
+export function SurfaceCard({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={cx("rounded-medium bg-card p-[18px]", className)}>{children}</div>;
 }
 
 export function EmptyState({ icon, message }: { icon?: ReactNode; message: string }) {
@@ -174,8 +188,8 @@ export function Avatar({ initials, size = 32 }: { initials: string; size?: numbe
   return (
     <span
       aria-hidden
-      className="inline-flex shrink-0 items-center justify-center rounded-full bg-accent-soft font-semibold text-accent-deep"
-      style={{ width: size, height: size, fontSize: size * 0.4 }}
+      className="inline-flex shrink-0 items-center justify-center rounded-full bg-accent/15 font-semibold text-accent"
+      style={{ width: size, height: size, fontSize: size * 0.38 }}
     >
       {initials}
     </span>

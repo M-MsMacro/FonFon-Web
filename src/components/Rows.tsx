@@ -11,7 +11,7 @@ import {
   type StageProgress,
 } from "@/lib/types";
 import { ChevronIcon } from "./icons";
-import { PhonemeBadge, StageTrack } from "./Phoneme";
+import { LetterTile, StageTrack } from "./Phoneme";
 import { StatusChip, cx } from "./ui";
 
 export function BackLink({ href, label, always = false }: { href: string; label: string; always?: boolean }) {
@@ -46,17 +46,18 @@ export function Stepper({
   previousLabel?: string;
   nextLabel?: string;
 }) {
-  const button = "inline-flex size-11 items-center justify-center rounded-full disabled:text-ink-3 enabled:text-accent enabled:hover:bg-sunken";
+  const button =
+    "inline-flex size-7 items-center justify-center rounded-full disabled:text-ink-3 enabled:text-ink-2 enabled:hover:bg-ink/10";
   return (
-    <div className="flex items-center justify-between gap-1">
+    <div className="flex items-center gap-1 rounded-full bg-ink/8 px-1.5 py-0.5">
       <button type="button" className={button} onClick={onPrevious} disabled={!canPrevious} aria-label={previousLabel}>
-        <ChevronIcon direction="left" className="size-4" />
+        <ChevronIcon direction="left" className="size-3.5" />
       </button>
-      <span className="text-center text-sm font-medium" aria-live="polite">
+      <span className="whitespace-nowrap px-1 text-center text-[15px] font-semibold" aria-live="polite">
         {label}
       </span>
       <button type="button" className={button} onClick={onNext} disabled={!canNext} aria-label={nextLabel}>
-        <ChevronIcon className="size-4" />
+        <ChevronIcon className="size-3.5" />
       </button>
     </div>
   );
@@ -107,7 +108,7 @@ export function PrescriptionRow({
   return (
     <div className="space-y-3 p-4">
       <div className="flex items-center gap-3">
-        <PhonemeBadge phonemeKey={prescription.phonemeKey} tone={isDone ? "done" : "accent"} />
+        <LetterTile phonemeKey={prescription.phonemeKey} size={32} />
         <div className="min-w-0 flex-1">
           <p className="font-semibold">{symbolFor(prescription.phonemeKey)}</p>
           <p className="text-xs text-ink-2">{caption}</p>

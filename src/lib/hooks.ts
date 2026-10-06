@@ -11,9 +11,9 @@ import {
   myProfile,
   weekMetrics,
 } from "./api";
-import { addDays, dayString } from "./calendar";
+import { addDays, dayString, startOfWeek } from "./calendar";
 import { supabase } from "./supabase/client";
-import type { Child } from "./types";
+import type { Child, WeekMetrics } from "./types";
 
 const REFRESH_MS = 60_000;
 
@@ -36,6 +36,21 @@ export function useWeek(childId: string, weekStart: Date, enabled: boolean) {
   return useSWR(
     enabled ? ["week", childId, dayString(weekStart)] : null,
     () => weekMetrics(childId, weekStart, timeZone()),
+    { refreshInterval: REFRESH_MS, revalidateOnFocus: true, keepPreviousData: true },
+  );
+}
+
+export function useWeeks(children: Child[] | undefined) {
+  const ids = (children ?? []).filter((child) => child.link.status === "active").map((child) => child.id);
+  return useSWR(
+    ids.length > 0 ? ["weeks", dayString(startOfWeek()), ids.join(",")] : null,
+    async () => {
+      const start = startOfWeek();
+      const entries = await Promise.all(
+        ids.map(async (id) => [id, await weekMetrics(id, start, timeZone())] as const),
+      );
+      return Object.fromEntries(entries) as Record<string, WeekMetrics>;
+    },
     { refreshInterval: REFRESH_MS, revalidateOnFocus: true, keepPreviousData: true },
   );
 }
