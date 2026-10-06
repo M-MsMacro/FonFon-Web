@@ -146,7 +146,7 @@ async function rpc<T>(name: string, params?: object): Promise<T> {
   return data as T;
 }
 
-export async function bootstrapProfile(displayName: string, email: string): Promise<Profile> {
+export async function bootstrapProfile(displayName: string, email: string | null): Promise<Profile> {
   const raw = await rpc<{ id: string; role: Profile["role"]; display_name: string; code: string | null; email: string | null }>(
     "bootstrap_profile",
     { p_role: "therapist", p_display_name: displayName, p_email: email },

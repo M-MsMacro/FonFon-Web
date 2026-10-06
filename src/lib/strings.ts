@@ -18,6 +18,7 @@ export const t = {
     signInWithApple: "Continuar com Apple",
     appleSignInFailed: "Não foi possível entrar com Apple. Tente de novo.",
     signUpTitle: "Criar conta",
+    defaultName: "Fonoaudióloga",
     forgotTitle: "Recuperar senha",
     resetTitle: "Nova senha",
     name: "Seu nome",

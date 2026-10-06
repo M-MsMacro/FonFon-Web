@@ -43,6 +43,7 @@ export function toApiError(error: unknown): ApiError {
   if (message === "child_not_found") return new ApiError("childNotFound", message);
   if (message === "role_conflict") return new ApiError("roleConflict", message);
   if (e.name === "AuthSessionMissingError") return new ApiError("notSignedIn", message);
+  if (e.code === "23503" && /profiles_id_fkey/.test(message)) return new ApiError("notSignedIn", message);
   if (e.name === "TypeError" || /failed to fetch|network|load failed/i.test(message)) {
     return new ApiError("offline", message);
   }

@@ -1,26 +1,29 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { PatientList } from "@/components/PatientList";
 import { Button, Loading, Notice, cx } from "@/components/ui";
 import { bootstrapProfile } from "@/lib/api";
+import { profileSeed } from "@/lib/auth-user";
 import { toApiError, messageFor } from "@/lib/errors";
 import { useProfile, useSignOut } from "@/lib/hooks";
 import { t } from "@/lib/strings";
 import { supabase } from "@/lib/supabase/client";
 
 export default function FonoLayout({ children }: LayoutProps<"/fono">) {
-  const router = useRouter();
   const pathname = usePathname();
   const signOut = useSignOut();
   const { data: profile, error, mutate } = useProfile();
   const bootstrapping = useRef(false);
+  const signingOut = useRef(false);
   const [bootError, setBootError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (toApiError(error).code === "notSignedIn" && error) router.replace("/entrar");
-  }, [error, router]);
+    if (!error || toApiError(error).code !== "notSignedIn" || signingOut.current) return;
+    signingOut.current = true;
+    void signOut();
+  }, [error, signOut]);
 
   useEffect(() => {
     if (profile !== null || bootstrapping.current) return;
@@ -33,11 +36,14 @@ export default function FonoLayout({ children }: LayoutProps<"/fono">) {
           await signOut();
           return;
         }
-        const email = user.email ?? "";
-        const name = (user.user_metadata?.display_name as string | undefined) || email.split("@")[0];
+        const { name, email } = profileSeed(user);
         await bootstrapProfile(name, email);
         await mutate();
       } catch (failure) {
+        if (toApiError(failure).code === "notSignedIn") {
+          await signOut();
+          return;
+        }
         setBootError(messageFor(failure));
       }
     })();
