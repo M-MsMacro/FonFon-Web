@@ -36,7 +36,7 @@ export default function ResetPasswordPage() {
         <div className="space-y-4">
           <Notice tone="done">{t.auth.resetDone}</Notice>
           <Link
-            href="/pro"
+            href="/fono"
             className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-accent px-5 font-medium text-on-accent"
           >
             {t.patients.title}

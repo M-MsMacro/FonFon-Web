@@ -10,7 +10,7 @@ import { useProfile, useSignOut } from "@/lib/hooks";
 import { t } from "@/lib/strings";
 import { supabase } from "@/lib/supabase/client";
 
-export default function ProLayout({ children }: LayoutProps<"/pro">) {
+export default function FonoLayout({ children }: LayoutProps<"/fono">) {
   const router = useRouter();
   const pathname = usePathname();
   const signOut = useSignOut();
@@ -43,7 +43,7 @@ export default function ProLayout({ children }: LayoutProps<"/pro">) {
     })();
   }, [profile, mutate, signOut]);
 
-  const onList = pathname === "/pro";
+  const onList = pathname === "/fono";
   const failure = bootError ?? (error && toApiError(error).code !== "notSignedIn" ? messageFor(error) : null);
   const wrongRole = profile && profile.role !== "therapist";
 

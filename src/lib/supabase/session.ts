@@ -25,7 +25,7 @@ export async function updateSession(request: NextRequest) {
   const signedIn = Boolean(data?.claims);
   const { pathname, search } = request.nextUrl;
 
-  if (!signedIn && pathname.startsWith("/pro")) {
+  if (!signedIn && pathname.startsWith("/fono")) {
     const redirect = request.nextUrl.clone();
     redirect.pathname = "/entrar";
     redirect.search = `?next=${encodeURIComponent(pathname + search)}`;
@@ -34,7 +34,7 @@ export async function updateSession(request: NextRequest) {
 
   if (signedIn && guestOnly.includes(pathname)) {
     const redirect = request.nextUrl.clone();
-    redirect.pathname = "/pro";
+    redirect.pathname = "/fono";
     redirect.search = "";
     return NextResponse.redirect(redirect);
   }

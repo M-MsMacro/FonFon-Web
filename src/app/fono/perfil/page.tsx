@@ -18,7 +18,7 @@ export default function ProfilePage() {
 
   return (
     <div className="mx-auto max-w-md space-y-6 p-6">
-      <BackLink href="/pro" label={t.patients.backToList} />
+      <BackLink href="/fono" label={t.patients.backToList} />
 
       <div className="flex flex-col items-center gap-3">
         <Avatar initials={initialsOf(profile.displayName)} size={100} />
