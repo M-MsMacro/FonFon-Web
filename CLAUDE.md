@@ -11,7 +11,7 @@
 FonFon Pro Web: the speech therapist app (iOS `Macro/AppFono/FonFon-Fono`) as a Next.js site, plus the public pages behind the QR code that links a child to a therapist. Spec: `../Macro/Specs/fono-web-nextjs.md` (source of truth for behavior).
 
 - `/` landing, `/v/[codigo]` QR destination, `/.well-known/apple-app-site-association` Universal Link file.
-- `/entrar`, `/criar-conta`, `/recuperar-senha`, `/redefinir-senha`, `/auth/callback`: e-mail and password accounts (Supabase Auth).
+- `/entrar`, `/criar-conta`, `/recuperar-senha`, `/redefinir-senha`, `/auth/callback`, `/auth/confirm`: e-mail and password accounts (Supabase Auth).
 - `/pro/**`: the therapist area. Client components, data through SWR hooks in `src/lib/hooks.ts`.
 
 # Backend
